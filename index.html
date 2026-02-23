@@ -3,194 +3,729 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex & Zach — Honeymoon Fund</title>
+    <title>Alex & Zach — Wedding Registry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --terra: #9B6040;
+            --terra: #A0714F;
             --terra-dark: #7A4A2E;
             --terra-light: #C8997A;
-            --cream: #EDE8DE;
-            --cream-dark: #E0D8CC;
-            --card: #FDFAF7;
-            --text: #2C1A0E;
-            --text-light: #7A5C4A;
+            --terra-muted: #B8906E;
+            --cream: #F5F0E8;
+            --cream-dark: #E8E0D4;
+            --cream-light: #FAF7F2;
+            --card: #FDFBF8;
+            --text: #3A2A1A;
+            --text-light: #8A7565;
+            --text-muted: #A89585;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
+            font-family: 'Cormorant Garamond', Georgia, serif;
             background-color: var(--cream);
             color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── Navigation ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 40px;
+            background: rgba(245, 240, 232, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200, 153, 122, 0.15);
+        }
+
+        nav a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 6px 16px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--terra);
+        }
+
+        /* ─── Hero ─── */
+        .hero {
+            position: relative;
+            width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #d4a574 0%, #c08b6b 25%, #a0714f 50%, #8b6040 75%, #6b4530 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(212, 165, 116, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(107, 69, 48, 0.3) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
             padding: 40px 20px;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 36px;
+        .hero-names {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            color: #FAF7F2;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 16px;
         }
 
-        .header h1 {
-            font-size: 2rem;
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            color: var(--terra);
-            margin-bottom: 6px;
-        }
-
-        .header .ampersand {
+        .hero-names .ampersand {
+            display: block;
             font-style: italic;
-            color: var(--terra-light);
+            font-size: 0.45em;
+            letter-spacing: 0.05em;
+            opacity: 0.8;
+            margin: 4px 0;
+            text-transform: lowercase;
         }
 
-        .header .subtitle {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.72rem;
-            color: var(--text-light);
+        .hero-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(250, 247, 242, 0.75);
+            margin-bottom: 8px;
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(250, 247, 242, 0.65);
+            letter-spacing: 0.04em;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .scroll-indicator a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: rgba(250, 247, 242, 0.5);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
+            transition: color 0.2s;
         }
 
-        .card {
+        .scroll-indicator a:hover {
+            color: rgba(250, 247, 242, 0.8);
+        }
+
+        .scroll-arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 1px solid currentColor;
+            border-bottom: 1px solid currentColor;
+            transform: rotate(45deg);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(6px); }
+        }
+
+        /* ─── Section ─── */
+        .section {
+            padding: 100px 20px;
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--terra-muted);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--text);
+            letter-spacing: 0.03em;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .section-text {
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ─── Divider ─── */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px auto;
+            max-width: 200px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--terra-light);
+            opacity: 0.4;
+        }
+
+        .divider-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--terra-light);
+            opacity: 0.5;
+        }
+
+        /* ─── Gift Card ─── */
+        .gift-card {
             background: var(--card);
-            border-radius: 10px;
-            box-shadow: 0 2px 16px rgba(44,26,14,0.08);
-            padding: 48px 44px;
+            border: 1px solid var(--cream-dark);
+            border-radius: 12px;
+            padding: 56px 48px;
+            max-width: 480px;
+            margin: 48px auto 0;
+            box-shadow: 0 4px 24px rgba(58, 42, 26, 0.06);
+        }
+
+        .gift-card h3 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--terra-dark);
+            margin-bottom: 12px;
+        }
+
+        .gift-card p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        /* ─── Button ─── */
+        .btn {
+            display: inline-block;
+            padding: 15px 52px;
+            background: var(--terra);
+            color: var(--cream-light);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.15s;
+        }
+
+        .btn:hover {
+            background: var(--terra-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* ─── Modal Overlay ─── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(58, 42, 26, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 48px 40px;
             max-width: 420px;
             width: 100%;
             text-align: center;
-            border: 1px solid var(--cream-dark);
+            box-shadow: 0 12px 48px rgba(58, 42, 26, 0.2);
+            animation: slideUp 0.3s ease;
+            position: relative;
         }
 
-        .card h2 {
-            font-size: 1.45rem;
-            font-weight: 400;
-            color: var(--terra-dark);
-            letter-spacing: 0.03em;
-            margin-bottom: 28px;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .contribute-btn {
-            display: inline-block;
-            padding: 13px 44px;
-            background: var(--terra);
-            color: #FAF5EF;
-            border: none;
-            border-radius: 5px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .contribute-btn:hover {
-            background: var(--terra-dark);
-        }
-
-        .currency-step {
-            display: none;
-        }
-
-        .currency-step .prompt {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.82rem;
-            color: var(--text-light);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .currency-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .currency-buttons a {
-            display: inline-block;
-            padding: 11px 24px;
-            background: var(--cream);
-            border: 1.5px solid var(--cream-dark);
-            border-radius: 5px;
-            color: var(--terra-dark);
-            text-decoration: none;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            transition: background 0.2s, border-color 0.2s;
-        }
-
-        .currency-buttons a:hover {
-            background: var(--cream-dark);
-            border-color: var(--terra-light);
-        }
-
-        .back-link {
-            display: block;
-            margin-top: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            cursor: pointer;
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
             background: none;
             border: none;
-            text-decoration: underline;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.2s;
         }
 
-        .back-link:hover {
+        .modal-close:hover {
             color: var(--text);
         }
 
-        .footer {
-            margin-top: 32px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.75rem;
-            color: var(--text-light);
-            letter-spacing: 0.06em;
+        .modal h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--terra-dark);
+            margin-bottom: 8px;
         }
 
-        @media (max-width: 480px) {
-            .header h1 { font-size: 1.6rem; }
-            .card { padding: 36px 24px; }
+        .modal .modal-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        /* ─── Currency Select ─── */
+        .currency-wrapper {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .currency-select {
+            width: 100%;
+            padding: 14px 18px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: var(--cream-light);
+            border: 1.5px solid var(--cream-dark);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .currency-select:focus {
+            outline: none;
+            border-color: var(--terra-light);
+        }
+
+        .currency-wrapper::after {
+            content: '';
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            width: 7px;
+            height: 7px;
+            border-right: 1.5px solid var(--text-muted);
+            border-bottom: 1.5px solid var(--text-muted);
+            pointer-events: none;
+        }
+
+        .btn-proceed {
+            width: 100%;
+            padding: 15px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn:disabled:hover {
+            background: var(--terra);
+            transform: none;
+        }
+
+        /* ─── Unsupported Message ─── */
+        .unsupported-msg {
+            display: none;
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .unsupported-msg p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .unsupported-msg a {
+            color: var(--terra);
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .unsupported-msg a:hover {
+            text-decoration: underline;
+        }
+
+        /* ─── Photo Gallery ─── */
+        .gallery {
+            padding: 0 20px 100px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-grid img:hover {
+            opacity: 0.85;
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            text-align: center;
+            padding: 48px 20px;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        footer p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 600px) {
+            nav {
+                padding: 14px 12px;
+                gap: 0;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 0.6rem;
+                padding: 4px 10px;
+                letter-spacing: 0.12em;
+            }
+
+            .hero-names {
+                letter-spacing: 0.08em;
+            }
+
+            .section {
+                padding: 72px 20px;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+            }
+
+            .gift-card {
+                padding: 40px 28px;
+            }
+
+            .modal {
+                padding: 40px 28px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>Alex <span class="ampersand">&amp;</span> Zach</h1>
-    <p class="subtitle">Wedding</p>
-</div>
+<!-- Navigation -->
+<nav>
+    <a href="#top">Home</a>
+    <a href="#registry" class="active">Registry</a>
+</nav>
 
-<div class="card">
-    <h2>Our Honeymoon Fund</h2>
-
-    <div id="contribute-step">
-        <button class="contribute-btn" onclick="showCurrencies()">Contribute</button>
+<!-- Hero -->
+<section class="hero" id="top">
+    <div class="hero-content">
+        <h1 class="hero-names">
+            Alex
+            <span class="ampersand">&amp;</span>
+            Zach
+        </h1>
+        <p class="hero-date">July 31, 2026</p>
+        <p class="hero-tagline">Celebrate with us</p>
     </div>
+    <div class="scroll-indicator">
+        <a href="#registry">
+            <span>Registry</span>
+            <span class="scroll-arrow"></span>
+        </a>
+    </div>
+</section>
 
-    <div class="currency-step" id="currency-step">
-        <p class="prompt">Select your currency</p>
-        <div class="currency-buttons">
-            <a id="link-gbp" href="#placeholder-gbp" target="_blank" rel="noopener noreferrer">£ GBP</a>
-            <a id="link-usd" href="#placeholder-usd" target="_blank" rel="noopener noreferrer">$ USD</a>
-            <a id="link-cad" href="#placeholder-cad" target="_blank" rel="noopener noreferrer">C$ CAD</a>
+<!-- Registry Section -->
+<section class="section" id="registry">
+    <p class="section-label">Our Registry</p>
+    <h2 class="section-title">Honeymoon Fund</h2>
+    <div class="divider"><span class="divider-dot"></span></div>
+    <p class="section-text">
+        Your presence at our wedding is the greatest gift we could ask for.
+        For those who wish to contribute, we've set up a honeymoon fund
+        to help us create unforgettable memories together.
+    </p>
+
+    <div class="gift-card">
+        <h3>Contribute a Gift</h3>
+        <p>Choose your preferred currency and you'll be directed to make a secure payment via bank transfer or card.</p>
+        <button class="btn" onclick="openModal()">Contribute</button>
+    </div>
+</section>
+
+<!-- Photo Gallery -->
+<section class="gallery" id="photos">
+    <div class="gallery-grid" id="gallery-grid">
+        <!-- Add photos here like: <img src="photos/photo1.jpg" alt="Alex & Zach"> -->
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>Alex &amp; Zach &mdash; 2026</p>
+</footer>
+
+<!-- Currency Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Select Your Currency</h3>
+        <p class="modal-subtitle">Choose the currency you'd like to pay in</p>
+
+        <div class="currency-wrapper">
+            <select class="currency-select" id="currency-select" onchange="onCurrencyChange()">
+                <option value="" disabled selected>Select a currency...</option>
+                <option value="AED">AED — UAE Dirham</option>
+                <option value="ARS">ARS — Argentine Peso</option>
+                <option value="AUD">AUD — Australian Dollar</option>
+                <option value="BDT">BDT — Bangladeshi Taka</option>
+                <option value="BGN">BGN — Bulgarian Lev</option>
+                <option value="BRL">BRL — Brazilian Real</option>
+                <option value="CAD">CAD — Canadian Dollar</option>
+                <option value="CHF">CHF — Swiss Franc</option>
+                <option value="CLP">CLP — Chilean Peso</option>
+                <option value="CNY">CNY — Chinese Yuan</option>
+                <option value="COP">COP — Colombian Peso</option>
+                <option value="CZK">CZK — Czech Koruna</option>
+                <option value="DKK">DKK — Danish Krone</option>
+                <option value="EGP">EGP — Egyptian Pound</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="GBP">GBP — British Pound</option>
+                <option value="GEL">GEL — Georgian Lari</option>
+                <option value="GHS">GHS — Ghanaian Cedi</option>
+                <option value="HKD">HKD — Hong Kong Dollar</option>
+                <option value="HUF">HUF — Hungarian Forint</option>
+                <option value="IDR">IDR — Indonesian Rupiah</option>
+                <option value="ILS">ILS — Israeli Shekel</option>
+                <option value="INR">INR — Indian Rupee</option>
+                <option value="JPY">JPY — Japanese Yen</option>
+                <option value="KES">KES — Kenyan Shilling</option>
+                <option value="KRW">KRW — South Korean Won</option>
+                <option value="LKR">LKR — Sri Lankan Rupee</option>
+                <option value="MAD">MAD — Moroccan Dirham</option>
+                <option value="MXN">MXN — Mexican Peso</option>
+                <option value="MYR">MYR — Malaysian Ringgit</option>
+                <option value="NGN">NGN — Nigerian Naira</option>
+                <option value="NOK">NOK — Norwegian Krone</option>
+                <option value="NZD">NZD — New Zealand Dollar</option>
+                <option value="PEN">PEN — Peruvian Sol</option>
+                <option value="PHP">PHP — Philippine Peso</option>
+                <option value="PKR">PKR — Pakistani Rupee</option>
+                <option value="PLN">PLN — Polish Zloty</option>
+                <option value="RON">RON — Romanian Leu</option>
+                <option value="SAR">SAR — Saudi Riyal</option>
+                <option value="SEK">SEK — Swedish Krona</option>
+                <option value="SGD">SGD — Singapore Dollar</option>
+                <option value="THB">THB — Thai Baht</option>
+                <option value="TRY">TRY — Turkish Lira</option>
+                <option value="TWD">TWD — Taiwan Dollar</option>
+                <option value="TZS">TZS — Tanzanian Shilling</option>
+                <option value="UAH">UAH — Ukrainian Hryvnia</option>
+                <option value="UGX">UGX — Ugandan Shilling</option>
+                <option value="USD">USD — US Dollar</option>
+                <option value="UYU">UYU — Uruguayan Peso</option>
+                <option value="VND">VND — Vietnamese Dong</option>
+                <option value="ZAR">ZAR — South African Rand</option>
+            </select>
         </div>
-        <button class="back-link" onclick="showContribute()">← Back</button>
+
+        <button class="btn btn-proceed" id="proceed-btn" onclick="proceed()" disabled>
+            Continue
+        </button>
+
+        <div class="unsupported-msg" id="unsupported-msg">
+            <p>
+                We're sorry, this currency isn't currently supported for online payments.
+                Please <a href="mailto:youremail@example.com" id="contact-link">contact us</a>
+                and we'll arrange an alternative for you.
+            </p>
+        </div>
     </div>
 </div>
 
-<p class="footer">Alex &amp; Zach &mdash; 2025</p>
+<script>
+    // ══════════════════════════════════════════════════════════
+    //  CONFIG — Replace these with your actual Wise payment links
+    // ══════════════════════════════════════════════════════════
+    var CONFIG = {
+        wiseCurrencies: {
+            GBP: "#your-gbp-wise-link",
+            USD: "#your-usd-wise-link",
+            CAD: "#your-cad-wise-link"
+        },
+        contactEmail: "youremail@example.com"
+    };
+    // ══════════════════════════════════════════════════════════
 
-<script src="registry.js"></script>
+    // Set contact email in the unsupported message link
+    document.getElementById("contact-link").href = "mailto:" + CONFIG.contactEmail;
+
+    var selectedCurrency = "";
+    var isSupported = false;
+
+    function openModal() {
+        document.getElementById("modal-overlay").classList.add("active");
+        document.getElementById("currency-select").value = "";
+        document.getElementById("proceed-btn").disabled = true;
+        document.getElementById("unsupported-msg").style.display = "none";
+        selectedCurrency = "";
+        isSupported = false;
+    }
+
+    function closeModal() {
+        document.getElementById("modal-overlay").classList.remove("active");
+    }
+
+    function closeModalOutside(e) {
+        if (e.target === document.getElementById("modal-overlay")) {
+            closeModal();
+        }
+    }
+
+    function onCurrencyChange() {
+        var select = document.getElementById("currency-select");
+        selectedCurrency = select.value;
+        isSupported = CONFIG.wiseCurrencies.hasOwnProperty(selectedCurrency);
+
+        document.getElementById("proceed-btn").disabled = false;
+        document.getElementById("unsupported-msg").style.display = "none";
+
+        if (!isSupported) {
+            document.getElementById("proceed-btn").disabled = true;
+            document.getElementById("unsupported-msg").style.display = "block";
+        }
+    }
+
+    function proceed() {
+        if (isSupported && selectedCurrency) {
+            window.open(CONFIG.wiseCurrencies[selectedCurrency], "_blank", "noopener,noreferrer");
+            closeModal();
+        }
+    }
+
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") closeModal();
+    });
+</script>
+
 </body>
 </html>
