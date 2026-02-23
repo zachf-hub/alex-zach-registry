@@ -8,14 +8,14 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --sage: #9CAF88;
-            --sage-light: #D4DFC7;
-            --sage-dark: #6B7F5E;
-            --cream: #FAF8F5;
-            --warm: #F5F0EB;
-            --text: #3D3D3D;
-            --text-light: #6B6B6B;
-            --gold: #C4A35A;
+            --terra: #9B6040;
+            --terra-dark: #7A4A2E;
+            --terra-light: #C8997A;
+            --cream: #EDE8DE;
+            --cream-dark: #E0D8CC;
+            --card: #FDFAF7;
+            --text: #2C1A0E;
+            --text-light: #7A5C4A;
         }
 
         body {
@@ -32,76 +32,66 @@
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
 
         .header h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 400;
-            letter-spacing: 0.05em;
-            color: var(--sage-dark);
+            letter-spacing: 0.08em;
+            color: var(--terra);
             margin-bottom: 6px;
         }
 
         .header .ampersand {
             font-style: italic;
-            color: var(--gold);
+            color: var(--terra-light);
         }
 
         .header .subtitle {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             color: var(--text-light);
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-            padding: 48px 40px;
-            max-width: 440px;
+            background: var(--card);
+            border-radius: 10px;
+            box-shadow: 0 2px 16px rgba(44,26,14,0.08);
+            padding: 48px 44px;
+            max-width: 420px;
             width: 100%;
             text-align: center;
-        }
-
-        .card .icon {
-            font-size: 2.4rem;
-            margin-bottom: 20px;
+            border: 1px solid var(--cream-dark);
         }
 
         .card h2 {
-            font-size: 1.6rem;
+            font-size: 1.45rem;
             font-weight: 400;
-            color: var(--text);
-            margin-bottom: 12px;
-        }
-
-        .card .desc {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 32px;
+            color: var(--terra-dark);
+            letter-spacing: 0.03em;
+            margin-bottom: 28px;
         }
 
         .contribute-btn {
             display: inline-block;
-            padding: 14px 40px;
-            background: var(--sage);
-            color: white;
+            padding: 13px 44px;
+            background: var(--terra);
+            color: #FAF5EF;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 0.04em;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             cursor: pointer;
             transition: background 0.2s;
         }
 
         .contribute-btn:hover {
-            background: var(--sage-dark);
+            background: var(--terra-dark);
         }
 
         .currency-step {
@@ -110,43 +100,45 @@
 
         .currency-step .prompt {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.88rem;
+            font-size: 0.82rem;
             color: var(--text-light);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            letter-spacing: 0.02em;
         }
 
         .currency-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .currency-buttons a {
             display: inline-block;
-            padding: 12px 28px;
-            background: var(--warm);
-            border: 1.5px solid var(--sage-light);
-            border-radius: 6px;
-            color: var(--text);
+            padding: 11px 24px;
+            background: var(--cream);
+            border: 1.5px solid var(--cream-dark);
+            border-radius: 5px;
+            color: var(--terra-dark);
             text-decoration: none;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
+            letter-spacing: 0.04em;
             transition: background 0.2s, border-color 0.2s;
         }
 
         .currency-buttons a:hover {
-            background: var(--sage-light);
-            border-color: var(--sage);
+            background: var(--cream-dark);
+            border-color: var(--terra-light);
         }
 
         .back-link {
             display: block;
             margin-top: 20px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-light);
             cursor: pointer;
             background: none;
@@ -159,15 +151,15 @@
         }
 
         .footer {
-            margin-top: 36px;
+            margin-top: 32px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--text-light);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
         }
 
         @media (max-width: 480px) {
-            .header h1 { font-size: 1.7rem; }
+            .header h1 { font-size: 1.6rem; }
             .card { padding: 36px 24px; }
         }
     </style>
@@ -176,20 +168,18 @@
 
 <div class="header">
     <h1>Alex <span class="ampersand">&amp;</span> Zach</h1>
-    <p class="subtitle">Honeymoon Fund</p>
+    <p class="subtitle">Wedding</p>
 </div>
 
 <div class="card">
-    <div class="icon">✈️</div>
-    <h2>Honeymoon Fund</h2>
-    <p class="desc">Any contribution towards our honeymoon adventure is deeply appreciated.</p>
+    <h2>Our Honeymoon Fund</h2>
 
     <div id="contribute-step">
         <button class="contribute-btn" onclick="showCurrencies()">Contribute</button>
     </div>
 
     <div class="currency-step" id="currency-step">
-        <p class="prompt">Select your currency to continue:</p>
+        <p class="prompt">Select your currency</p>
         <div class="currency-buttons">
             <a id="link-gbp" href="#placeholder-gbp" target="_blank" rel="noopener noreferrer">£ GBP</a>
             <a id="link-usd" href="#placeholder-usd" target="_blank" rel="noopener noreferrer">$ USD</a>
@@ -199,7 +189,7 @@
     </div>
 </div>
 
-<p class="footer">Made with love &mdash; Alex &amp; Zach</p>
+<p class="footer">Alex &amp; Zach &mdash; 2025</p>
 
 <script src="registry.js"></script>
 </body>
