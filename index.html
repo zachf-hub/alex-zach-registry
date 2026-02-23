@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex and Zach's Wedding Registry</title>
+    <title>Alex & Zach — Honeymoon Fund</title>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -22,22 +22,25 @@
             font-family: 'Georgia', 'Times New Roman', serif;
             background-color: var(--cream);
             color: var(--text);
-            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
         }
 
-        /* Header */
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(180deg, var(--sage-light) 0%, var(--cream) 100%);
+            margin-bottom: 40px;
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 400;
             letter-spacing: 0.05em;
             color: var(--sage-dark);
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
 
         .header .ampersand {
@@ -46,171 +49,126 @@
         }
 
         .header .subtitle {
-            font-size: 1.1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.78rem;
             color: var(--text-light);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.8rem;
         }
 
-        /* Message section */
-        .message {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 20px 20px 40px;
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            padding: 48px 40px;
+            max-width: 440px;
+            width: 100%;
             text-align: center;
         }
 
-        .message p {
-            font-size: 1.05rem;
-            color: var(--text-light);
-            font-style: italic;
-            line-height: 1.8;
+        .card .icon {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
         }
 
-        /* Currency selector */
-        .currency-bar {
-            text-align: center;
-            padding: 16px 20px;
-            background: var(--warm);
-            border-top: 1px solid var(--sage-light);
-            border-bottom: 1px solid var(--sage-light);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .currency-bar label {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-right: 10px;
-        }
-
-        .currency-bar select {
-            font-family: inherit;
-            font-size: 0.95rem;
-            padding: 6px 12px;
-            border: 1px solid var(--sage);
-            border-radius: 4px;
-            background: white;
+        .card h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
             color: var(--text);
-            cursor: pointer;
+            margin-bottom: 12px;
         }
 
-        .currency-notice {
-            display: none;
-            margin-top: 10px;
-            padding: 12px 20px;
-            background: #FFF8E7;
-            border: 1px solid var(--gold);
-            border-radius: 6px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text);
-        }
-
-        /* Registry grid */
-        .registry {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 24px;
-        }
-
-        .item-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .item-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-        }
-
-        .item-photo {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: var(--sage-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--sage-dark);
-            font-size: 0.85rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
-        .item-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .item-info {
-            padding: 18px;
-        }
-
-        .item-info h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .item-info .price {
+        .card .desc {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 0.95rem;
-            color: var(--sage-dark);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .item-info .description {
-            font-size: 0.88rem;
             color: var(--text-light);
-            margin-bottom: 14px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 32px;
         }
 
-        .item-info a.gift-link {
+        .contribute-btn {
             display: inline-block;
-            padding: 8px 22px;
+            padding: 14px 40px;
             background: var(--sage);
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            border: none;
+            border-radius: 6px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.03em;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            cursor: pointer;
             transition: background 0.2s;
         }
 
-        .item-info a.gift-link:hover {
+        .contribute-btn:hover {
             background: var(--sage-dark);
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-light);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--sage-light);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        .currency-step {
+            display: none;
         }
 
-        @media (max-width: 600px) {
-            .header h1 { font-size: 1.8rem; }
-            .registry { grid-template-columns: 1fr; padding: 24px 16px; }
+        .currency-step .prompt {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .currency-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .currency-buttons a {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--warm);
+            border: 1.5px solid var(--sage-light);
+            border-radius: 6px;
+            color: var(--text);
+            text-decoration: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .currency-buttons a:hover {
+            background: var(--sage-light);
+            border-color: var(--sage);
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-decoration: underline;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .footer {
+            margin-top: 36px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.7rem; }
+            .card { padding: 36px 24px; }
         }
     </style>
 </head>
@@ -218,40 +176,30 @@
 
 <div class="header">
     <h1>Alex <span class="ampersand">&amp;</span> Zach</h1>
-    <p class="subtitle">Wedding Registry</p>
+    <p class="subtitle">Honeymoon Fund</p>
 </div>
 
-<div class="message">
-    <p>
-        Thank you so much for celebrating with us!
-        Your presence is the greatest gift, but if you'd like to
-        help us build our new home together, we've put together
-        a few things we'd love.
-    </p>
-</div>
+<div class="card">
+    <div class="icon">✈️</div>
+    <h2>Honeymoon Fund</h2>
+    <p class="desc">Any contribution towards our honeymoon adventure is deeply appreciated.</p>
 
-<div class="currency-bar">
-    <label for="currency-select">Your currency:</label>
-    <select id="currency-select">
-        <option value="GBP">GBP (&pound;)</option>
-        <option value="USD">USD ($)</option>
-        <option value="CAD">CAD (C$)</option>
-        <option value="other">Other</option>
-    </select>
-    <div class="currency-notice" id="currency-notice">
-        We currently have payment links for GBP, USD, and CAD.
-        If you'd like to contribute in another currency, please
-        reach out to us directly and we'll get a link set up for you!
+    <div id="contribute-step">
+        <button class="contribute-btn" onclick="showCurrencies()">Contribute</button>
+    </div>
+
+    <div class="currency-step" id="currency-step">
+        <p class="prompt">Select your currency to continue:</p>
+        <div class="currency-buttons">
+            <a id="link-gbp" href="#placeholder-gbp" target="_blank" rel="noopener noreferrer">£ GBP</a>
+            <a id="link-usd" href="#placeholder-usd" target="_blank" rel="noopener noreferrer">$ USD</a>
+            <a id="link-cad" href="#placeholder-cad" target="_blank" rel="noopener noreferrer">C$ CAD</a>
+        </div>
+        <button class="back-link" onclick="showContribute()">← Back</button>
     </div>
 </div>
 
-<div class="registry" id="registry">
-    <!-- Items inserted by JS -->
-</div>
-
-<div class="footer">
-    <p>Made with love by Alex &amp; Zach</p>
-</div>
+<p class="footer">Made with love &mdash; Alex &amp; Zach</p>
 
 <script src="registry.js"></script>
 </body>
